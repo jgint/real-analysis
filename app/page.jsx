@@ -9,7 +9,54 @@ const visualizations = [
     description: 'Proof by Contradiction using Interval Bisection',
     route: '/heine-borel',
   },
-  // Add more visualizations here as you create them
+  {
+    id: 'open-closed-sets',
+    title: 'Open vs. Closed Sets',
+    description: 'Understanding topology in ℝ through visualization',
+    route: '/open-closed-sets',
+  },
+  {
+    id: 'open-covering',
+    title: 'Open Covering',
+    description: 'Visualizing open coverings and finite subcovers',
+    route: '/open-covering',
+  },
+  {
+    id: 'order-viz',
+    title: 'Order on Real Numbers',
+    description: 'Well-definedness, totality, and compatibility of order',
+    route: '/order-viz',
+  },
+  {
+    id: 'seq-limits',
+    title: 'Sequences and Limits',
+    description: 'Lemma 1.3.3: Sequences and their limits',
+    route: '/seq-limits',
+  },
+  {
+    id: 'seq-from-below',
+    title: 'Sequences from Below',
+    description: 'Understanding sequences approaching from below',
+    route: '/seq-from-below',
+  },
+  {
+    id: 'root2',
+    title: 'Trapping √2 Between Rationals',
+    description: 'Finding rational approximations to irrational numbers',
+    route: '/root2',
+  },
+  {
+    id: 'closed-accumulation-points',
+    title: 'Closed Sets and Accumulation Points',
+    description: 'Understanding closed sets through accumulation points',
+    route: '/closed-accumulation-points',
+  },
+  {
+    id: 'closed-accumulation-points-rev',
+    title: 'Closed Sets and Accumulation Points (Reverse)',
+    description: 'Reverse direction: accumulation points imply closed',
+    route: '/closed-accumulation-points-rev',
+  },
 ];
 
 export default function Home() {

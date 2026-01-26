@@ -78,29 +78,13 @@ export default function HeineBorelProofVisualization() {
   const limitPoint = 0.656;
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(150deg, #0d1117 0%, #161b22 50%, #21262d 100%)',
-      fontFamily: '"Source Serif 4", Georgia, serif',
-      color: '#e6edf3',
-      padding: '40px 20px'
-    }}>
-
-      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <h1 style={{
-          fontSize: '2.5rem',
-          fontWeight: 700,
-          textAlign: 'center',
-          marginBottom: '8px',
-          background: 'linear-gradient(135deg, #88c0d0 0%, #81a1c1 50%, #b48ead 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
-        }}>
+    <div className="viz-page-container">
+      <div className="viz-content-container">
+        <h1 className="viz-title">
           Heine-Borel Theorem
         </h1>
         
-        <p style={{ textAlign: 'center', opacity: 0.7, marginBottom: '8px', fontSize: '1.1rem' }}>
+        <p className="viz-subtitle">
           Proof by Contradiction using Interval Bisection
         </p>
 
@@ -161,12 +145,7 @@ export default function HeineBorelProofVisualization() {
         </div>
 
         {/* Main Visualization */}
-        <div style={{
-          background: 'rgba(0, 0, 0, 0.4)',
-          borderRadius: '16px',
-          padding: '20px',
-          marginTop: '24px'
-        }}>
+        <div className="visualization-container">
           <svg viewBox="0 0 600 380" style={{ width: '100%', height: 'auto' }}>
             <defs>
               <linearGradient id="intervalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
