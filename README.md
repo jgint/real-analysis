@@ -38,17 +38,63 @@ npm run dev
 
 ## Deployment to Vercel
 
-This project is configured for easy deployment to Vercel:
+This project is configured for easy deployment to Vercel. Choose one of the following methods:
 
-1. Push your code to GitHub
-2. Import the repository in Vercel
-3. Vercel will automatically detect Next.js and configure the build
+### Method 1: GitHub Integration (Recommended)
 
-Or use the Vercel CLI:
-```bash
-npm i -g vercel
-vercel
-```
+1. **Push your code to GitHub:**
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin https://github.com/yourusername/your-repo-name.git
+   git push -u origin main
+   ```
+
+2. **Deploy via Vercel Dashboard:**
+   - Go to [vercel.com](https://vercel.com) and sign in (or create an account)
+   - Click "Add New Project"
+   - Import your GitHub repository
+   - Vercel will automatically detect Next.js and configure the build settings
+   - Click "Deploy"
+
+3. **Automatic deployments:**
+   - Every push to `main` will trigger a new deployment
+   - Pull requests will create preview deployments
+
+### Method 2: Vercel CLI
+
+1. **Install Vercel CLI:**
+   ```bash
+   npm i -g vercel
+   ```
+
+2. **Deploy:**
+   ```bash
+   vercel
+   ```
+   - Follow the prompts to link your project
+   - For production deployment, run `vercel --prod`
+
+3. **Environment variables (if needed):**
+   ```bash
+   vercel env add VARIABLE_NAME
+   ```
+
+### Configuration
+
+The project includes a `vercel.json` file with optimal settings. Vercel will automatically:
+- Detect Next.js framework
+- Run `npm install` and `npm run build`
+- Serve the app with optimal caching and performance
+
+### Custom Domain
+
+After deployment:
+1. Go to your project settings in Vercel
+2. Navigate to "Domains"
+3. Add your custom domain
+4. Follow DNS configuration instructions
 
 ## Build for Production
 
