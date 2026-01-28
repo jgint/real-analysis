@@ -57,6 +57,12 @@ const visualizations = [
     description: 'Reverse direction: accumulation points imply closed',
     route: '/closed-accumulation-points-rev',
   },
+  {
+    id: 'compact-set',
+    title: 'Compact Sets',
+    description: 'A visual guide to compactness: open coverings, finite subcovers, and sequential compactness',
+    route: '/compact-set',
+  },
 ];
 
 export default function Home() {
