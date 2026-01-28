@@ -48,7 +48,8 @@ const CompactSetsVisualGuide = () => {
     ];
 
     return (
-      <svg viewBox="0 0 100 100" className="w-full h-64">
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+        <svg viewBox="0 0 100 100" style={{ width: '100%', maxWidth: '500px', height: 'auto' }}>
         {/* Animated open sets */}
         {openSets.map((set, i) => (
           <g key={i}>
@@ -75,15 +76,16 @@ const CompactSetsVisualGuide = () => {
           stroke="#dfe6e9"
           strokeWidth="1"
         />
-        <text x="50" y="52" textAnchor="middle" fill="#dfe6e9" fontSize="4" fontFamily="serif">
+        <text x="50" y="52" textAnchor="middle" fill="rgba(255, 255, 255, 0.9)" fontSize="4" fontFamily="var(--font-primary)">
           [a, b] — compact set
         </text>
         
         {/* Labels */}
-        <text x="50" y="12" textAnchor="middle" fill="#b2bec3" fontSize="3.5" fontFamily="sans-serif">
+        <text x="50" y="12" textAnchor="middle" fill="rgba(255, 255, 255, 0.7)" fontSize="3.5" fontFamily="var(--font-primary)">
           Open sets covering the compact set
         </text>
-      </svg>
+        </svg>
+      </div>
     );
   };
 
@@ -101,16 +103,21 @@ const CompactSetsVisualGuide = () => {
     ];
 
     return (
-      <div className="space-y-4">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <button
           onClick={() => setShowReduction(!showReduction)}
-          className="px-4 py-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg font-medium hover:from-amber-500 hover:to-orange-500 transition-all shadow-lg"
+          className="btn"
+          style={{
+            background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)',
+            alignSelf: 'flex-start',
+          }}
         >
           {showReduction ? 'Show All Open Sets' : 'Extract Finite Subcover'}
         </button>
         
-        <svg viewBox="0 0 100 100" className="w-full h-64">
-          {allSets.map((set, i) => {
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <svg viewBox="0 0 100 100" style={{ width: '100%', maxWidth: '500px', height: 'auto' }}>
+            {allSets.map((set, i) => {
             const visible = !showReduction || set.essential;
             return (
               <circle
@@ -141,14 +148,15 @@ const CompactSetsVisualGuide = () => {
             stroke="#f8f9fa"
             strokeWidth="1.5"
           />
-          <text x="50" y="52" textAnchor="middle" fill="#f8f9fa" fontSize="4" fontFamily="serif">
+          <text x="50" y="52" textAnchor="middle" fill="rgba(255, 255, 255, 0.95)" fontSize="4" fontFamily="var(--font-primary)">
             [a, b]
           </text>
           
-          <text x="50" y="92" textAnchor="middle" fill="#b2bec3" fontSize="3" fontFamily="sans-serif">
+          <text x="50" y="92" textAnchor="middle" fill="rgba(255, 255, 255, 0.7)" fontSize="3" fontFamily="var(--font-primary)">
             {showReduction ? '✓ Only 3 open sets needed!' : 'Infinitely many open sets...'}
           </text>
-        </svg>
+          </svg>
+        </div>
       </div>
     );
   };
@@ -166,27 +174,32 @@ const CompactSetsVisualGuide = () => {
     }, [showConvergence, sequenceDemo.points]);
 
     return (
-      <div className="space-y-4">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <button
           onClick={() => setShowConvergence(!showConvergence)}
-          className="px-4 py-2 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-lg font-medium hover:from-teal-500 hover:to-cyan-500 transition-all shadow-lg"
+          className="btn"
+          style={{
+            background: 'linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%)',
+            alignSelf: 'flex-start',
+          }}
         >
           {showConvergence ? 'Show Full Sequence' : 'Find Convergent Subsequence'}
         </button>
 
-        <svg viewBox="0 0 100 100" className="w-full h-64">
-          {/* Compact set boundary (a disk) */}
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            fill="rgba(45, 52, 54, 0.6)"
-            stroke="#dfe6e9"
-            strokeWidth="1.5"
-          />
-          <text x="50" y="95" textAnchor="middle" fill="#b2bec3" fontSize="3" fontFamily="serif">
-            Compact set (closed bounded disk)
-          </text>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <svg viewBox="0 0 100 100" style={{ width: '100%', maxWidth: '500px', height: 'auto' }}>
+            {/* Compact set boundary (a disk) */}
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              fill="rgba(13, 17, 23, 0.4)"
+              stroke="rgba(136, 192, 208, 0.4)"
+              strokeWidth="1.5"
+            />
+            <text x="50" y="95" textAnchor="middle" fill="rgba(255, 255, 255, 0.7)" fontSize="3" fontFamily="var(--font-primary)">
+              Compact set (closed bounded disk)
+            </text>
 
           {/* Sequence points */}
           {sequenceDemo.points.map((pt, i) => {
@@ -199,21 +212,22 @@ const CompactSetsVisualGuide = () => {
                   cx={pt.x * 100}
                   cy={pt.y * 100}
                   r={highlight ? 2.5 : 1.5}
-                  fill={highlight ? '#4ecdc4' : '#ff6b6b'}
+                  fill={highlight ? '#88c0d0' : '#e94560'}
                   style={{
                     opacity: showConvergence ? (isInSubseq ? 1 : 0.2) : 0.8,
                     transition: 'all 0.5s ease-in-out'
                   }}
                 />
                 {highlight && (
-                  <text
-                    x={pt.x * 100 + 3}
-                    y={pt.y * 100 - 2}
-                    fill="#4ecdc4"
-                    fontSize="2.5"
-                  >
-                    a_{pt.index}
-                  </text>
+                    <text
+                      x={pt.x * 100 + 3}
+                      y={pt.y * 100 - 2}
+                      fill="#88c0d0"
+                      fontSize="2.5"
+                      fontFamily="var(--font-mono)"
+                    >
+                      a_{pt.index}
+                    </text>
                 )}
               </g>
             );
@@ -238,14 +252,20 @@ const CompactSetsVisualGuide = () => {
                   repeatCount="indefinite"
                 />
               </circle>
-              <text x="50" y="43" textAnchor="middle" fill="#ffe66d" fontSize="3" fontWeight="bold">
+              <text x="50" y="43" textAnchor="middle" fill="#ebcb8b" fontSize="3" fontWeight="bold" fontFamily="var(--font-primary)">
                 limit point
               </text>
             </g>
           )}
-        </svg>
+          </svg>
+        </div>
         
-        <p className="text-sm text-slate-400 text-center">
+        <p style={{
+          fontSize: '0.9rem',
+          color: 'var(--text-secondary)',
+          textAlign: 'center',
+          margin: '0.5rem 0 0 0',
+        }}>
           {showConvergence 
             ? "The highlighted subsequence converges to a limit inside the compact set!"
             : "Every sequence has infinitely many points..."}
@@ -254,28 +274,95 @@ const CompactSetsVisualGuide = () => {
     );
   };
 
-  const EquivalenceCard = ({ title, description, icon, color }) => (
-    <div 
-      className={`p-5 rounded-xl border-2 ${color} bg-slate-800/50 backdrop-blur-sm hover:scale-105 transition-all duration-300 cursor-pointer`}
-      onMouseEnter={() => setHoveredConcept(title)}
-      onMouseLeave={() => setHoveredConcept(null)}
-    >
-      <div className="text-3xl mb-3">{icon}</div>
-      <h4 className="text-lg font-bold text-white mb-2">{title}</h4>
-      <p className="text-sm text-slate-300">{description}</p>
-    </div>
-  );
+  const EquivalenceCard = ({ title, description, icon, color }) => {
+    const colorMap = {
+      'border-emerald-500/50': { border: 'rgba(16, 185, 129, 0.5)', bg: 'rgba(6, 78, 59, 0.15)' },
+      'border-amber-500/50': { border: 'rgba(245, 158, 11, 0.5)', bg: 'rgba(120, 53, 15, 0.15)' },
+      'border-purple-500/50': { border: 'rgba(168, 85, 247, 0.5)', bg: 'rgba(88, 28, 135, 0.15)' },
+    };
+    const colors = colorMap[color] || { border: 'rgba(136, 192, 208, 0.5)', bg: 'rgba(13, 17, 23, 0.3)' };
+    
+    return (
+      <div 
+        className="card"
+        style={{
+          padding: '1.25rem',
+          borderRadius: '12px',
+          border: `2px solid ${colors.border}`,
+          background: colors.bg,
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'scale(1.05)';
+          setHoveredConcept(title);
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'scale(1)';
+          setHoveredConcept(null);
+        }}
+      >
+        <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{icon}</div>
+        <h4 style={{
+          fontSize: '1.1rem',
+          fontWeight: 700,
+          color: 'var(--text-primary)',
+          marginBottom: '0.5rem',
+        }}>
+          {title}
+        </h4>
+        <p style={{
+          fontSize: '0.9rem',
+          color: 'var(--text-secondary)',
+          margin: 0,
+        }}>
+          {description}
+        </p>
+      </div>
+    );
+  };
 
   const ExampleCard = ({ title, set, isCompact, reason }) => (
-    <div className={`p-4 rounded-lg border ${isCompact ? 'border-emerald-500/50 bg-emerald-900/20' : 'border-rose-500/50 bg-rose-900/20'}`}>
-      <div className="flex items-center gap-2 mb-2">
-        <span className={`text-xl ${isCompact ? 'text-emerald-400' : 'text-rose-400'}`}>
+    <div
+      className="card"
+      style={{
+        padding: '1rem',
+        borderRadius: '8px',
+        border: `1px solid ${isCompact ? 'rgba(16, 185, 129, 0.5)' : 'rgba(244, 63, 94, 0.5)'}`,
+        background: isCompact ? 'rgba(6, 78, 59, 0.15)' : 'rgba(127, 29, 29, 0.15)',
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+        <span style={{
+          fontSize: '1.25rem',
+          color: isCompact ? '#10b981' : '#f43f5e',
+        }}>
           {isCompact ? '✓' : '✗'}
         </span>
-        <h4 className="font-bold text-white">{title}</h4>
+        <h4 style={{
+          fontWeight: 700,
+          color: 'var(--text-primary)',
+          margin: 0,
+        }}>
+          {title}
+        </h4>
       </div>
-      <code className="block text-amber-300 font-mono text-sm mb-2">{set}</code>
-      <p className="text-xs text-slate-400">{reason}</p>
+      <code style={{
+        display: 'block',
+        color: '#fbbf24',
+        fontFamily: 'var(--font-mono)',
+        fontSize: '0.9rem',
+        marginBottom: '0.5rem',
+      }}>
+        {set}
+      </code>
+      <p style={{
+        fontSize: '0.85rem',
+        color: 'var(--text-secondary)',
+        margin: 0,
+      }}>
+        {reason}
+      </p>
     </div>
   );
 
@@ -303,20 +390,6 @@ const CompactSetsVisualGuide = () => {
         {/* Header */}
         <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <h1 className="viz-title">Compact Sets</h1>
-          <p className="viz-subtitle">
-            A Visual Guide for Math 20300 — Analysis in ℝⁿ
-          </p>
-          <div
-            style={{
-              marginTop: '1rem',
-              height: '4px',
-              width: '8rem',
-              marginInline: 'auto',
-              background:
-                'linear-gradient(to right, transparent, #fbbf24, transparent)',
-              borderRadius: '999px',
-            }}
-          />
         </header>
 
         {/* Navigation */}
@@ -344,7 +417,7 @@ const CompactSetsVisualGuide = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           {/* Section 0: Introduction */}
           {activeSection === 0 && (
-            <section className="proof-box">
+            <section className="proof-box" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
               <h2
                 style={{
                   fontSize: '1.5rem',
@@ -381,8 +454,14 @@ const CompactSetsVisualGuide = () => {
                   >
                     📜 Definition (Open Cover)
                   </h3>
-                  <p className="math-text" style={{ color: '#e5e7eb' }}>
-                    A subset A ⊂ ℝ is <strong style={{ color: 'white' }}>compact</strong> if every open covering of A 
+                  <p style={{
+                    color: 'var(--text-secondary)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.9rem',
+                    margin: 0,
+                    lineHeight: 1.7,
+                  }}>
+                    A subset A ⊂ ℝ is <strong style={{ color: 'var(--text-primary)' }}>compact</strong> if every open covering of A 
                     has a <em style={{ color: '#fbbf24' }}>finite subcovering</em>.
                   </p>
                 </div>
@@ -447,22 +526,58 @@ const CompactSetsVisualGuide = () => {
 
           {/* Section 1: Open Coverings */}
           {activeSection === 1 && (
-            <section className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700">
-              <h2 className="text-2xl font-serif font-bold text-amber-300 mb-6">Open Coverings</h2>
+            <section className="proof-box" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
+              <h2 style={{
+                fontSize: '1.5rem',
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 700,
+                color: '#fbbf24',
+                marginBottom: '1.5rem',
+              }}>
+                Open Coverings
+              </h2>
               
-              <div className="bg-slate-900/50 rounded-xl p-6 border border-slate-600 mb-6">
-                <h3 className="text-slate-200 font-bold mb-3">📖 Definition</h3>
-                <p className="text-slate-300">
-                  An <strong className="text-amber-300">open covering</strong> of a set A is a collection of open sets 
+              <div className="definition-box" style={{ marginBottom: '1.5rem' }}>
+                <h3 style={{
+                  color: 'var(--text-primary)',
+                  fontWeight: 700,
+                  marginBottom: '0.75rem',
+                  fontSize: '1rem',
+                }}>
+                  📖 Definition
+                </h3>
+                <p style={{
+                  color: 'var(--text-secondary)',
+                  margin: 0,
+                  lineHeight: 1.7,
+                }}>
+                  An <strong style={{ color: '#fbbf24' }}>open covering</strong> of a set A is a collection of open sets 
                   {' {'}U<sub>i</sub>{'}'}<sub>i∈I</sub> such that A ⊂ ⋃<sub>i∈I</sub> U<sub>i</sub>.
                 </p>
               </div>
 
               <OpenCoveringVisualization />
 
-              <div className="mt-6 text-slate-400 text-sm">
-                <p>
-                  <strong className="text-white">Key insight:</strong> The dashed circles represent open sets. 
+              <div className="proof-box" style={{
+                marginTop: '1.5rem',
+                background: 'rgba(79, 195, 247, 0.08)',
+                border: '1px solid rgba(79, 195, 247, 0.3)',
+              }}>
+                <h4 style={{
+                  margin: '0 0 8px 0',
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                  color: '#4fc3f7',
+                }}>
+                  Key insight
+                </h4>
+                <p style={{
+                  margin: 0,
+                  fontSize: '0.9rem',
+                  lineHeight: 1.6,
+                  color: 'var(--text-secondary)',
+                }}>
+                  The dashed circles represent open sets. 
                   Notice how they overlap and together cover the entire compact set [a, b]. Each point in the set 
                   is contained in at least one open set.
                 </p>
@@ -472,25 +587,64 @@ const CompactSetsVisualGuide = () => {
 
           {/* Section 2: Finite Subcover */}
           {activeSection === 2 && (
-            <section className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700">
-              <h2 className="text-2xl font-serif font-bold text-amber-300 mb-6">Finite Subcover Property</h2>
+            <section className="proof-box" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
+              <h2 style={{
+                fontSize: '1.5rem',
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 700,
+                color: '#fbbf24',
+                marginBottom: '1.5rem',
+              }}>
+                Finite Subcover Property
+              </h2>
               
-              <div className="bg-slate-900/50 rounded-xl p-6 border border-orange-500/30 mb-6">
-                <h3 className="text-orange-300 font-bold mb-3">🔑 The Magic of Compactness</h3>
-                <p className="text-slate-300">
+              <div className="definition-box" style={{
+                marginBottom: '1.5rem',
+                borderLeftColor: '#f59e0b',
+              }}>
+                <h3 style={{
+                  color: '#f59e0b',
+                  fontWeight: 700,
+                  marginBottom: '0.75rem',
+                  fontSize: '1rem',
+                }}>
+                  🔑 The Magic of Compactness
+                </h3>
+                <p style={{
+                  color: 'var(--text-secondary)',
+                  margin: 0,
+                  lineHeight: 1.7,
+                }}>
                   No matter how many open sets you use to cover a compact set—even infinitely many—you can 
-                  always find a <strong className="text-amber-300">finite</strong> number that still covers it!
+                  always find a <strong style={{ color: '#fbbf24' }}>finite</strong> number that still covers it!
                 </p>
               </div>
 
               <FiniteSubcoverVisualization />
 
-              <div className="mt-6 bg-slate-900/30 rounded-lg p-4 border border-slate-700">
-                <h4 className="text-slate-200 font-bold mb-2">Why does this matter?</h4>
-                <ul className="text-sm text-slate-400 space-y-2">
-                  <li>• <strong className="text-white">Finite ≈ Manageable:</strong> We can work with finitely many things!</li>
-                  <li>• <strong className="text-white">Uniform properties:</strong> Enables uniform continuity, uniform convergence</li>
-                  <li>• <strong className="text-white">Extrema exist:</strong> Continuous functions achieve max/min on compact sets</li>
+              <div className="proof-box" style={{
+                marginTop: '1.5rem',
+                background: 'rgba(0, 0, 0, 0.2)',
+                border: '1px solid rgba(136, 192, 208, 0.2)',
+              }}>
+                <h4 style={{
+                  color: 'var(--text-primary)',
+                  fontWeight: 700,
+                  marginBottom: '0.5rem',
+                  fontSize: '0.95rem',
+                }}>
+                  Why does this matter?
+                </h4>
+                <ul style={{
+                  fontSize: '0.9rem',
+                  color: 'var(--text-secondary)',
+                  margin: 0,
+                  paddingLeft: '1.5rem',
+                  lineHeight: 1.8,
+                }}>
+                  <li><strong style={{ color: 'var(--text-primary)' }}>Finite ≈ Manageable:</strong> We can work with finitely many things!</li>
+                  <li><strong style={{ color: 'var(--text-primary)' }}>Uniform properties:</strong> Enables uniform continuity, uniform convergence</li>
+                  <li><strong style={{ color: 'var(--text-primary)' }}>Extrema exist:</strong> Continuous functions achieve max/min on compact sets</li>
                 </ul>
               </div>
             </section>
@@ -498,23 +652,61 @@ const CompactSetsVisualGuide = () => {
 
           {/* Section 3: Sequential Compactness */}
           {activeSection === 3 && (
-            <section className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700">
-              <h2 className="text-2xl font-serif font-bold text-amber-300 mb-6">Sequential Compactness</h2>
+            <section className="proof-box" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
+              <h2 style={{
+                fontSize: '1.5rem',
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 700,
+                color: '#fbbf24',
+                marginBottom: '1.5rem',
+              }}>
+                Sequential Compactness
+              </h2>
               
-              <div className="bg-slate-900/50 rounded-xl p-6 border border-teal-500/30 mb-6">
-                <h3 className="text-teal-300 font-bold mb-3">📖 Definition</h3>
-                <p className="text-slate-300">
-                  A set A is <strong className="text-teal-300">sequentially compact</strong> if every sequence in A 
+              <div className="definition-box" style={{
+                marginBottom: '1.5rem',
+                borderLeftColor: '#14b8a6',
+              }}>
+                <h3 style={{
+                  color: '#14b8a6',
+                  fontWeight: 700,
+                  marginBottom: '0.75rem',
+                  fontSize: '1rem',
+                }}>
+                  📖 Definition
+                </h3>
+                <p style={{
+                  color: 'var(--text-secondary)',
+                  margin: 0,
+                  lineHeight: 1.7,
+                }}>
+                  A set A is <strong style={{ color: '#14b8a6' }}>sequentially compact</strong> if every sequence in A 
                   has a subsequence that converges to a point <em>in A</em>.
                 </p>
               </div>
 
               <SequentialCompactnessVisualization />
 
-              <div className="mt-6 bg-slate-900/30 rounded-lg p-4 border border-slate-700">
-                <h4 className="text-slate-200 font-bold mb-2">The Bolzano-Weierstrass Connection</h4>
-                <p className="text-sm text-slate-400">
-                  This is closely related to the <strong className="text-amber-300">Bolzano-Weierstrass Theorem</strong>: 
+              <div className="proof-box" style={{
+                marginTop: '1.5rem',
+                background: 'rgba(0, 0, 0, 0.2)',
+                border: '1px solid rgba(136, 192, 208, 0.2)',
+              }}>
+                <h4 style={{
+                  color: 'var(--text-primary)',
+                  fontWeight: 700,
+                  marginBottom: '0.5rem',
+                  fontSize: '0.95rem',
+                }}>
+                  The Bolzano-Weierstrass Connection
+                </h4>
+                <p style={{
+                  fontSize: '0.9rem',
+                  color: 'var(--text-secondary)',
+                  margin: 0,
+                  lineHeight: 1.6,
+                }}>
+                  This is closely related to the <strong style={{ color: '#fbbf24' }}>Bolzano-Weierstrass Theorem</strong>: 
                   every bounded sequence in ℝ has a convergent subsequence. For compact sets, we additionally 
                   need the limit to be <em>inside</em> the set—which is guaranteed by closedness!
                 </p>
@@ -524,17 +716,45 @@ const CompactSetsVisualGuide = () => {
 
           {/* Section 4: Equivalences */}
           {activeSection === 4 && (
-            <section className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700">
-              <h2 className="text-2xl font-serif font-bold text-amber-300 mb-6">The Three Equivalences</h2>
+            <section className="proof-box" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
+              <h2 style={{
+                fontSize: '1.5rem',
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 700,
+                color: '#fbbf24',
+                marginBottom: '1.5rem',
+              }}>
+                The Three Equivalences
+              </h2>
               
-              <div className="bg-gradient-to-r from-amber-900/30 to-orange-900/30 rounded-xl p-6 border border-amber-500/30 mb-8">
-                <h3 className="text-amber-300 font-bold mb-3">⚡ Lemma 2.3.4 (from your notes)</h3>
-                <p className="text-slate-200">
-                  For A ⊂ ℝ, the following are <strong className="text-white">equivalent</strong>:
+              <div className="definition-box" style={{
+                marginBottom: '2rem',
+                borderLeftColor: '#fbbf24',
+                background: 'rgba(120, 53, 15, 0.15)',
+              }}>
+                <h3 style={{
+                  color: '#fbbf24',
+                  fontWeight: 700,
+                  marginBottom: '0.75rem',
+                  fontSize: '1rem',
+                }}>
+                  ⚡ Lemma 2.3.4 (from your notes)
+                </h3>
+                <p style={{
+                  color: 'var(--text-primary)',
+                  margin: 0,
+                  lineHeight: 1.7,
+                }}>
+                  For A ⊂ ℝ, the following are <strong>equivalent</strong>:
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-4 mb-8">
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '1rem',
+                marginBottom: '2rem',
+              }}>
                 <EquivalenceCard
                   title="Bounded & Closed"
                   description="A is contained in some interval [−M, M] and contains all its accumulation points."
@@ -556,7 +776,8 @@ const CompactSetsVisualGuide = () => {
               </div>
 
               <div className="relative">
-                <svg viewBox="0 0 300 100" className="w-full h-32">
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                  <svg viewBox="0 0 300 100" style={{ width: '100%', maxWidth: '600px', height: 'auto' }}>
                   {/* Circular arrows connecting the three concepts */}
                   <defs>
                     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -579,21 +800,41 @@ const CompactSetsVisualGuide = () => {
                     markerEnd="url(#arrowhead)"
                   />
                   
-                  <text x="60" y="55" textAnchor="middle" fill="#10b981" fontSize="10" fontWeight="bold">1</text>
-                  <text x="150" y="55" textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold">2</text>
-                  <text x="240" y="55" textAnchor="middle" fill="#a855f7" fontSize="10" fontWeight="bold">3</text>
-                </svg>
-                <p className="text-center text-slate-400 text-sm">All three definitions are equivalent in ℝ and ℝⁿ!</p>
+                  <text x="60" y="55" textAnchor="middle" fill="#a3be8c" fontSize="10" fontWeight="bold" fontFamily="var(--font-mono)">1</text>
+                  <text x="150" y="55" textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold" fontFamily="var(--font-mono)">2</text>
+                  <text x="240" y="55" textAnchor="middle" fill="#b48ead" fontSize="10" fontWeight="bold" fontFamily="var(--font-mono)">3</text>
+                  </svg>
+                </div>
+                <p style={{
+                  textAlign: 'center',
+                  color: 'var(--text-secondary)',
+                  fontSize: '0.9rem',
+                  margin: '0.5rem 0 0 0',
+                }}>
+                  All three definitions are equivalent in ℝ and ℝⁿ!
+                </p>
               </div>
             </section>
           )}
 
           {/* Section 5: Examples */}
           {activeSection === 5 && (
-            <section className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700">
-              <h2 className="text-2xl font-serif font-bold text-amber-300 mb-6">Examples & Non-Examples</h2>
+            <section className="proof-box" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
+              <h2 style={{
+                fontSize: '1.5rem',
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 700,
+                color: '#fbbf24',
+                marginBottom: '1.5rem',
+              }}>
+                Examples & Non-Examples
+              </h2>
               
-              <div className="grid md:grid-cols-2 gap-4">
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                gap: '1rem',
+              }}>
                 <ExampleCard
                   title="Closed Interval"
                   set="[0, 1]"
@@ -644,24 +885,34 @@ const CompactSetsVisualGuide = () => {
                 />
               </div>
 
-              <div className="mt-8 bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl p-6 border border-amber-500/20">
-                <h3 className="text-amber-300 font-bold mb-3">💡 Quick Test for Compactness in ℝ</h3>
-                <ol className="text-slate-300 space-y-2 list-decimal list-inside">
-                  <li><strong className="text-white">Check boundedness:</strong> Is it contained in some [−M, M]?</li>
-                  <li><strong className="text-white">Check closedness:</strong> Does it contain all limit points?</li>
-                  <li>If both ✓, then <span className="text-emerald-400 font-bold">compact!</span></li>
+              <div className="proof-box" style={{
+                marginTop: '2rem',
+                background: 'rgba(0, 0, 0, 0.2)',
+                border: '1px solid rgba(245, 158, 11, 0.3)',
+              }}>
+                <h3 style={{
+                  color: '#fbbf24',
+                  fontWeight: 700,
+                  marginBottom: '0.75rem',
+                  fontSize: '1rem',
+                }}>
+                  💡 Quick Test for Compactness in ℝ
+                </h3>
+                <ol style={{
+                  color: 'var(--text-secondary)',
+                  margin: 0,
+                  paddingLeft: '1.5rem',
+                  lineHeight: 1.8,
+                  fontSize: '0.95rem',
+                }}>
+                  <li><strong style={{ color: 'var(--text-primary)' }}>Check boundedness:</strong> Is it contained in some [−M, M]?</li>
+                  <li><strong style={{ color: 'var(--text-primary)' }}>Check closedness:</strong> Does it contain all limit points?</li>
+                  <li>If both ✓, then <span style={{ color: '#10b981', fontWeight: 700 }}>compact!</span></li>
                 </ol>
               </div>
             </section>
           )}
         </div>
-
-        {/* Footer */}
-        <footer className="mt-12 text-center text-slate-500 text-sm">
-          <div className="h-px w-48 mx-auto bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-4" />
-          <p>Math 20300 — Analysis in ℝⁿ | Winter 2026</p>
-          <p className="mt-1 text-slate-600">Based on Boller & Sally, Lemma 2.3.4</p>
-        </footer>
       </div>
     </div>
   );

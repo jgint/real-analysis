@@ -38,8 +38,14 @@ export default function Sqrt2Visualization() {
         </p>
         
         <div className="proof-box" style={{ marginBottom: '24px' }}>
-          <label style={{ display: 'block', marginBottom: '12px', color: '#88c0d0', fontSize: '1rem' }}>
-            Grid denominator q = {q} (grid spacing = 1/{q})
+          <label style={{
+            display: 'block',
+            marginBottom: '12px',
+            color: 'var(--color-primary)',
+            fontSize: '0.95rem',
+            fontWeight: 500,
+          }}>
+            Grid denominator q = {q} <span style={{ color: 'var(--text-secondary)', fontWeight: 400 }}>(grid spacing = 1/{q})</span>
           </label>
           <input
             type="range"
@@ -50,21 +56,34 @@ export default function Sqrt2Visualization() {
             style={{
               width: '100%',
               maxWidth: '400px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              accentColor: 'var(--color-primary)',
             }}
           />
         </div>
       
       <div className="visualization-container" style={{ marginBottom: '24px' }}>
-      <svg width="600" height="280" style={{ width: '100%', height: 'auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+        <svg
+          width="600"
+          height="280"
+          viewBox="0 0 600 280"
+          style={{
+            background: 'rgba(13, 17, 23, 0.6)',
+            borderRadius: '12px',
+            border: '1px solid rgba(136, 192, 208, 0.2)',
+            maxWidth: '100%',
+            height: 'auto',
+          }}
+        >
         {/* Number line */}
-        <line x1="40" y1="120" x2="560" y2="120" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
+        <line x1="40" y1="120" x2="560" y2="120" stroke="rgba(136, 192, 208, 0.4)" strokeWidth="2" />
         
         {/* Tick marks and labels for 0, 1, 2 */}
         {[0, 1, 2].map(val => (
           <g key={val}>
-            <line x1={scale(val)} y1="115" x2={scale(val)} y2="125" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
-            <text x={scale(val)} y="145" textAnchor="middle" fill="#88c0d0" fontSize="14" fontFamily="Fira Code">{val}</text>
+            <line x1={scale(val)} y1="115" x2={scale(val)} y2="125" stroke="rgba(136, 192, 208, 0.4)" strokeWidth="2" />
+            <text x={scale(val)} y="145" textAnchor="middle" fill="var(--color-primary)" fontSize="14" fontFamily="var(--font-mono)">{val}</text>
           </g>
         ))}
         
@@ -89,8 +108,8 @@ export default function Sqrt2Visualization() {
                   textAnchor="middle"
                   fontSize="12"
                   fontWeight="600"
-                  fontFamily="Fira Code"
-                  fill={isX ? "#a3be8c" : "#bf616a"}
+                  fontFamily="var(--font-mono)"
+                  fill={isX ? "#a3be8c" : "#e94560"}
                 >
                   {isX ? `x = ${x.toFixed(3)}` : `x+ε = ${xPlusEps.toFixed(3)}`}
                 </text>
@@ -101,53 +120,82 @@ export default function Sqrt2Visualization() {
         
         {/* sqrt(2) marker */}
         <line x1={scale(sqrt2)} y1="90" x2={scale(sqrt2)} y2="150" stroke="#b48ead" strokeWidth="2" strokeDasharray="4" />
-        <text x={scale(sqrt2)} y="80" textAnchor="middle" fontSize="14" fontWeight="700" fontFamily="Fira Code" fill="#b48ead">√2 ≈ 1.414</text>
+        <text x={scale(sqrt2)} y="80" textAnchor="middle" fontSize="14" fontWeight="700" fontFamily="var(--font-mono)" fill="#b48ead">√2 ≈ 1.414</text>
         
         {/* Legend */}
         <g transform="translate(50, 190)">
-          <circle cx="10" cy="10" r="5" fill="#88c0d0" />
-          <text x="25" y="14" fontSize="12" fontFamily="Fira Code" fill="rgba(255,255,255,0.8)">k/q where (k/q)² &lt; 2</text>
+          <circle cx="10" cy="10" r="5" fill="var(--color-primary)" />
+          <text x="25" y="14" fontSize="12" fontFamily="var(--font-primary)" fill="rgba(255,255,255,0.7)">k/q where (k/q)² &lt; 2</text>
           
-          <circle cx="10" cy="35" r="5" fill="rgba(255,255,255,0.3)" />
-          <text x="25" y="39" fontSize="12" fontFamily="Fira Code" fill="rgba(255,255,255,0.8)">k/q where (k/q)² &gt; 2</text>
+          <circle cx="10" cy="35" r="5" fill="rgba(136, 192, 208, 0.3)" />
+          <text x="25" y="39" fontSize="12" fontFamily="var(--font-primary)" fill="rgba(255,255,255,0.7)">k/q where (k/q)² &gt; 2</text>
           
           <circle cx="200" cy="10" r="6" fill="#a3be8c" />
-          <text x="215" y="14" fontSize="12" fontFamily="Fira Code" fill="rgba(255,255,255,0.8)">x (largest with x² &lt; 2)</text>
+          <text x="215" y="14" fontSize="12" fontFamily="var(--font-primary)" fill="rgba(255,255,255,0.7)">x (largest with x² &lt; 2)</text>
           
-          <circle cx="200" cy="35" r="6" fill="#bf616a" />
-          <text x="215" y="39" fontSize="12" fontFamily="Fira Code" fill="rgba(255,255,255,0.8)">x + ε (has (x+ε)² &gt; 2)</text>
+          <circle cx="200" cy="35" r="6" fill="#e94560" />
+          <text x="215" y="39" fontSize="12" fontFamily="var(--font-primary)" fill="rgba(255,255,255,0.7)">x + ε (has (x+ε)² &gt; 2)</text>
           
           <line x1="400" y1="5" x2="400" y2="20" stroke="#b48ead" strokeWidth="2" strokeDasharray="4" />
-          <text x="415" y="14" fontSize="12" fontFamily="Fira Code" fill="rgba(255,255,255,0.8)">√2 (irrational)</text>
+          <text x="415" y="14" fontSize="12" fontFamily="var(--font-primary)" fill="rgba(255,255,255,0.7)">√2 (irrational)</text>
         </g>
-      </svg>
+        </svg>
+      </div>
       </div>
       
       <div className="proof-box" style={{ marginBottom: '24px' }}>
-        <h3 style={{ margin: '0 0 12px 0', color: '#88c0d0', fontSize: '1.1rem' }}>Current Values:</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', fontSize: '0.95rem' }}>
+        <h3 style={{
+          margin: '0 0 12px 0',
+          color: 'var(--color-primary)',
+          fontSize: '1rem',
+          fontWeight: 600,
+        }}>
+          Current Values:
+        </h3>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '16px',
+          fontSize: '0.95rem',
+        }}>
           <div>
-            <span style={{ opacity: 0.7 }}>Grid spacing:</span>
+            <span style={{ color: 'var(--text-secondary)' }}>Grid spacing:</span>
             <span className="math" style={{ marginLeft: '8px' }}>1/{q} = {(1/q).toFixed(4)}</span>
           </div>
           <div>
-            <span style={{ opacity: 0.7 }}>√2 ≈</span>
+            <span style={{ color: 'var(--text-secondary)' }}>√2 ≈</span>
             <span className="math" style={{ marginLeft: '8px' }}>{sqrt2.toFixed(6)}</span>
           </div>
           <div>
             <span style={{ color: '#a3be8c', fontWeight: 600 }}>x = {x.toFixed(4)}</span>
-            <span style={{ marginLeft: '8px', opacity: 0.7 }}>with x² = {(x*x).toFixed(6)} &lt; 2 ✓</span>
+            <span style={{ marginLeft: '8px', color: 'var(--text-secondary)' }}>with x² = {(x*x).toFixed(6)} &lt; 2 ✓</span>
           </div>
           <div>
-            <span style={{ color: '#bf616a', fontWeight: 600 }}>x + ε = {xPlusEps.toFixed(4)}</span>
-            <span style={{ marginLeft: '8px', opacity: 0.7 }}>with (x+ε)² = {(xPlusEps*xPlusEps).toFixed(6)} &gt; 2 ✓</span>
+            <span style={{ color: '#e94560', fontWeight: 600 }}>x + ε = {xPlusEps.toFixed(4)}</span>
+            <span style={{ marginLeft: '8px', color: 'var(--text-secondary)' }}>with (x+ε)² = {(xPlusEps*xPlusEps).toFixed(6)} &gt; 2 ✓</span>
           </div>
         </div>
       </div>
       
-      <div className="proof-box" style={{ background: 'rgba(136, 192, 208, 0.1)', borderColor: 'rgba(136, 192, 208, 0.3)' }}>
-        <p style={{ margin: 0, fontSize: '0.95rem', lineHeight: 1.7 }}>
-          <strong style={{ color: '#88c0d0' }}>Key insight:</strong> As you increase q, the grid becomes finer, and x gets closer to √2 from below.
+      <div className="proof-box" style={{
+        background: 'rgba(79, 195, 247, 0.08)',
+        border: '1px solid rgba(79, 195, 247, 0.3)',
+      }}>
+        <h4 style={{
+          margin: '0 0 8px 0',
+          fontSize: '0.95rem',
+          fontWeight: 600,
+          color: '#4fc3f7',
+        }}>
+          Key insight
+        </h4>
+        <p style={{
+          margin: 0,
+          fontSize: '0.9rem',
+          lineHeight: 1.6,
+          color: 'var(--text-secondary)',
+        }}>
+          As you increase q, the grid becomes finer, and x gets closer to √2 from below.
           For any ε = p/q, we can always find such an x because we're choosing the largest grid point
           whose square is still less than 2.
         </p>
