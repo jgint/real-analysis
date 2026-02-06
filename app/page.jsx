@@ -63,6 +63,18 @@ const visualizations = [
     description: 'A visual guide to compactness: open coverings, finite subcovers, and sequential compactness',
     route: '/compact-set',
   },
+  {
+    id: 'int-ext-boundary',
+    title: 'Interior, Boundary & Exterior',
+    description: 'Probe points and ε-balls to see interior, boundary, and exterior of a set',
+    route: '/int-ext-boundary',
+  },
+  {
+    id: 'adherent-accumulation-isolated',
+    title: 'Adherent, Accumulation & Isolated Points',
+    description: 'Probe points with open balls to see adherent, accumulation, and isolated points of a set',
+    route: '/adherent-accumulation-isolated',
+  },
 ];
 
 export default function Home() {
