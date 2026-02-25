@@ -75,6 +75,18 @@ const visualizations = [
     description: 'Probe points with open balls to see adherent, accumulation, and isolated points of a set',
     route: '/adherent-accumulation-isolated',
   },
+  {
+    id: 'conv-function-to-point',
+    title: 'Convergence of a Function at a Point',
+    description: 'Definition 3.4.1: ε–δ visualization for f(x) → y₀ as x → x₀',
+    route: '/conv-function-to-point',
+  },
+  {
+    id: 'pointwise-uniform-conv',
+    title: 'Pointwise vs Uniform Convergence',
+    description: 'fₙ(x) = xⁿ converging to f(x) = 0 on (−1,1) vs [−½,½]',
+    route: '/pointwise-uniform-conv',
+  },
 ];
 
 export default function Home() {
